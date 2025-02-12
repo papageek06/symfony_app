@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body %}
+
+    <div class="row col-md-8 mx-auto mt-5">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+    </div>
+
+<ul>  
+
+    {# débuger #}
+    {# {{ dump(app.user) }} #}
+
+    <li>Email : {{app.user.email}} </p>
+
+</ul>
+{% endblock %}

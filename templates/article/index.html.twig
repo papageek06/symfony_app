@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController!
+{% endblock %}
+
+{% block body %}
+
+	<ul>
+
+		<li>
+			Titre :
+			{{article.title}}</li>
+		<li>
+			Description :
+			{{article.description}}</li>
+		<li>
+			<img width="200" src="{{asset(article.picture)}}"/>
+		</li>
+		<li>
+			Stock :{{article.stock}}</li>
+		<li>
+			Price :
+			{{article.price}}</li>
+		<li>
+			Category :
+			{{article.category.name}}</li>
+
+	</ul>
+
+	<form method="post" action="{{ path('app_add_cart', { idArticle :  article.id }) }}" class="d-inline">
+		<button type="submit" class="btn btn-primary">
+			Ajouter au panier
+		</button>
+	</form>
+
+
+{% endblock %}
