@@ -12,6 +12,7 @@ final class ArticleController extends AbstractController
     #[Route('/article', name: 'app_article')]
     public function index(): Response
     {
+        // retourne la vue qui affiche tous les articles
         return $this->render('article/index.html.twig', [
             'controller_name' => 'ArticleController',
         ]);
@@ -21,7 +22,9 @@ final class ArticleController extends AbstractController
     public function getArticleInfo(int $id, ArticleRepository $articleRepository): Response
     {
         // récupérer en bdd les informations liées à l'article avec l'id = {id}
+        // vas chercher l'article qui a l'id = {id}
         $article = $articleRepository->find($id);
+        // retourne la vue qui affiche les informations de l'article
         return $this->render('article/index.html.twig', [
             'article' => $article,
         ]);

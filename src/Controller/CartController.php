@@ -20,19 +20,26 @@ final class CartController extends AbstractController
     #[Route('/cart', name: 'app_cart')]
     public function index(Request $request): Response
     {
+        // recupere la session envoyer avec la requete
         $session = $request->getSession();
+        //stock dans une variable la session cart
         $cartSession = $session->get('cart');
+        //initialise la variable total_amount a 0
         $total_amount = 0;
 
+        // si la session cart n'est pas null et que le nombre d'articles est superieur a 0
         if (!is_null($cartSession) && count($cartSession["id"]) > 0) {
-
+            //boucle sur le nombre d'articles
             for ($i = 0; $i < count($cartSession["id"]); $i++) {
+                //calcule le total du panier
                 $total_amount += $cartSession["price"][$i] * $cartSession["quantity"][$i];
             }
 
         }
 
+        //retourne la vue qui affiche le panier
         return $this->render('cart/index.html.twig', [
+            //nom et valeur des variables a envoyer a la vue
             'cart_items' => $cartSession,
             'total_amount' => $total_amount
         ]);
@@ -76,6 +83,7 @@ final class CartController extends AbstractController
         // mettre à jour la session
         $session->set('cart', $cartSession);
 
+        //redirect to the cart page
         return $this->redirectToRoute('app_cart');
     }
 
@@ -125,10 +133,10 @@ final class CartController extends AbstractController
         // récupérer la session
         $session = $request->getSession();
         $cartSession = $session->get('cart', []);
-
+        // Vérifier si l'article existe dans le panier et stocker sa clé
         if (($key = array_search($idArticle, $cartSession['id'])) !== false) {
 
-            // mettre à jour la quantité
+            // mettre à jour la quantité par rapport a sa position dans le tableau
             $cartSession['quantity'][$key] = $quantity;
 
             // mettre à jour la session
