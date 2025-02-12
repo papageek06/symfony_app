@@ -4,23 +4,32 @@
 
 {% block body %}
 
-<div class="example-wrapper">
-
-    {# ITÉRATIONS #}
-    <ul>
+<div class="example-wrapper container">
+    <div class="row">
+        {# ITÉRATIONS #}
         {% for article in articles %}
-            <li> <a href="{{ path('show_article', { id : article.id }) }}">{{article.title|upper}} <img width= "100px" src="{{article.picture}}"></a> </li>
+        <div class="col-md-4 mb-4">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{ article.picture }}" alt="c samih">
+                <div class="card-body">
+                    <h5 class="card-title">{{ article.title|upper }}</h5>
+                    <p class="card-text">{{ article.description }}</p><br>
+                    <p class="card-text">{{ article.price }} €</p>
+                    <a href="{{ path('show_article', { id: article.id }) }}" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
         {% else %}
             <p>Aucun article disponible</p>
         {% endfor %}
-    </ul>
+    </div>
 
     {# CONDITIONS #}
-    {% if articles|length > 0 %} 
-        <p>{{articles|length}}</p>
+    {% if articles|length > 0 %}
+        <p>{{ articles|length }}</p>
     {% else %}
-        <p> Pas d'articles dans la liste </p>
+        <p>Pas d'articles dans la liste</p>
     {% endif %}
-
 </div>
+
 {% endblock %}
