@@ -62,10 +62,10 @@
                             </li>
                         {% endif %}
 
-						      <form class="d-flex" action="{{ path('app_article_search') }}" method="GET">
+						      {# <form class="d-flex" action="{{ path('app_article_search') }}" method="GET">
 									<input class="form-control me-2" type="search" placeholder="Rechercher un article..." name="query" required>
 									<button class="btn btn-outline-light" type="submit">Rechercher</button>
-								</form>
+								</form> #}
 
 						{% if is_granted('ROLE_ADMIN') %}
 							<li class="nav-item">
