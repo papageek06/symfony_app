@@ -122,6 +122,22 @@ final class CartController extends AbstractController
         return $this->redirectToRoute('app_cart');
     }
 
+    #[Route('/cart/delete/', name: 'app_delete_all_cart')]
+    public function deleteALLProductFromCart(Request $request, ArticleRepository $articleRepository): Response
+    {
+        // récupérer la session
+        $session = $request->getSession();
+        $cartSession = $session->get('cart', []);
+
+
+
+        // Mettre à jour la session avec le nouveau panier
+        $session->remove('cart', $cartSession);
+
+        // Rediriger vers la page du panier
+        return $this->redirectToRoute('app_cart');
+    }
+
     #[Route('/cart/modify/quantity', name: 'app_modify_cart', methods: ['POST'])]
     public function modifyQuantityCart(Request $request, ArticleRepository $articleRepository): Response
     {

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -29,6 +30,24 @@ final class ArticleController extends AbstractController
             'article' => $article,
         ]);
     }
+
+//     #[Route('/search', name: 'app_article_search')]
+// public function search(Request $request, ArticleRepository $articleRepository): Response
+// {
+//     $query = $request->query->get('query');
+
+//     if (!$query) {
+//         return $this->redirectToRoute('app_home');
+//     }
+
+//     $articles = $articleRepository->findByTitleOrContent($query);
+
+//     return $this->render('article/search_results.html.twig', [
+//         'articles' => $articles,
+//         'query' => $query
+//     ]);
+// }
+
 
     // REST
     // ARTICLE

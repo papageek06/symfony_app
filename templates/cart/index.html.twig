@@ -4,16 +4,7 @@
 
 {% block body %}
 
-<div class="container my-5">
-    <h2 class="mb-4">Votre panier</h2>
-
-    <div class="row col-md-8 mx-auto mt-5">
-        {% for message in app.flashes('success') %}
-            <div class="alert alert-success">
-                {{message}}
-            </div>
-        {% endfor %}
-    </div>
+{{include('message_flash.html.twig')}}
 
     {% if cart_items["id"] is defined and cart_items["id"] is not empty %}
         <table class="table table-bordered table-hover">
@@ -57,7 +48,16 @@
             <a href="{{ path('app_home') }}" class="btn btn-secondary">Continuer vos achats</a>
             <form method="post" action="{{path('app_validate_cart')}}" class="d-inline">
                 <input type="hidden" name="total_amount" value="{{total_amount}}"/>
+
+                {% if app.user %}
+                    
                 <button type="submit" class="btn btn-success">Passer à la commande</button>
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="btn btn-success">Se connecter pour commander</a>
+                {% endif %}
+
+                <a href="{{ path('app_delete_all_cart') }}" class="btn btn-warning">supprimer tout le panier</a>
+
             </form>
         </div>
     {% else %}
